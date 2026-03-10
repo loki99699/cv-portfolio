@@ -1,0 +1,430 @@
+/* ================================================================
+   Footer.css
+   Aesthetic: Cosmic Void / Deep Space Closing
+   Fonts: Bebas Neue (display watermark) + DM Serif Display (brand)
+          + Fira Code (mono details)
+   Accent: Violet aurora + ice-white starlight
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Fira+Code:wght@300;400&display=swap');
+
+/* ── Variables ───────────────────────────────────────────────── */
+.site-footer {
+  --f-bg:           #080810;
+  --f-bg-mid:       #0b0b16;
+  --f-border:       rgba(130, 100, 255, 0.18);
+  --f-violet:       #8264ff;
+  --f-violet-dim:   rgba(130, 100, 255, 0.08);
+  --f-ice:          #c8d8ff;
+  --f-ice-muted:    rgba(200, 216, 255, 0.45);
+  --f-text:         #9098b8;
+  --f-text-dim:     #2e3250;
+  --f-star:         rgba(200, 216, 255, 0.7);
+  --font-display:   'Bebas Neue', Impact, sans-serif;
+  --font-serif:     'DM Serif Display', Georgia, serif;
+  --font-mono:      'Fira Code', 'Courier New', monospace;
+}
+
+/* ================================================================
+   FOOTER BASE
+   ================================================================ */
+.site-footer {
+  position: relative;
+  background: var(--f-bg);
+  overflow: hidden;
+  isolation: isolate;
+  padding: 0 0 3rem;
+}
+
+/* Deep gradient fade from page bg into void */
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(8,8,16,0) 0%, var(--f-bg) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================================================================
+   AURORA TOP BORDER
+   ================================================================ */
+.footer-aurora {
+  position: relative;
+  z-index: 2;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--f-violet) 25%,
+    var(--f-ice) 50%,
+    var(--f-violet) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: auroraSweep 5s ease-in-out infinite;
+  box-shadow:
+    0 0 18px rgba(130, 100, 255, 0.55),
+    0 0 50px rgba(130, 100, 255, 0.18);
+}
+
+@keyframes auroraSweep {
+  0%   { background-position: 100% 0; }
+  50%  { background-position:   0% 0; }
+  100% { background-position: 100% 0; }
+}
+
+/* Secondary soft glow band below aurora */
+.footer-aurora::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(
+    to bottom,
+    rgba(130, 100, 255, 0.1),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* ================================================================
+   STAR FIELD
+   ================================================================ */
+.footer-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* 30 hand-placed star dots using box-shadow trick */
+.footer-stars::before,
+.footer-stars::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+/* Layer 1 — small dim stars */
+.footer-stars::before {
+  top: 0; left: 0;
+  width: 2px; height: 2px;
+  background: transparent;
+  box-shadow:
+     8vw  35%  0  1px rgba(200,216,255,0.55),
+    15vw  60%  0  1px rgba(200,216,255,0.30),
+    23vw  25%  0  1px rgba(200,216,255,0.50),
+    31vw  70%  0  1px rgba(200,216,255,0.40),
+    38vw  42%  0  1px rgba(200,216,255,0.60),
+    46vw  18%  0  1px rgba(200,216,255,0.35),
+    52vw  78%  0  1px rgba(200,216,255,0.45),
+    59vw  50%  0  1px rgba(200,216,255,0.30),
+    67vw  30%  0  1px rgba(200,216,255,0.55),
+    74vw  65%  0  1px rgba(200,216,255,0.40),
+    82vw  22%  0  1px rgba(200,216,255,0.50),
+    90vw  55%  0  1px rgba(200,216,255,0.35),
+    95vw  40%  0  1px rgba(200,216,255,0.60),
+    12vw  80%  0  1px rgba(200,216,255,0.25),
+    71vw  82%  0  1px rgba(200,216,255,0.30);
+  animation: starTwinkle1 7s ease-in-out infinite alternate;
+}
+
+/* Layer 2 — slightly brighter stars */
+.footer-stars::after {
+  top: 0; left: 0;
+  width: 2px; height: 2px;
+  background: transparent;
+  box-shadow:
+     4vw  55%  0  1px rgba(200,216,255,0.70),
+    20vw  45%  0  2px rgba(200,216,255,0.45),
+    35vw  88%  0  1px rgba(200,216,255,0.60),
+    48vw  30%  0  2px rgba(200,216,255,0.50),
+    63vw  68%  0  1px rgba(200,216,255,0.65),
+    78vw  44%  0  2px rgba(200,216,255,0.40),
+    87vw  75%  0  1px rgba(200,216,255,0.55),
+    56vw  90%  0  1px rgba(200,216,255,0.30),
+    42vw  15%  0  1px rgba(130,100,255,0.60),
+    93vw  20%  0  2px rgba(130,100,255,0.45);
+  animation: starTwinkle2 9s ease-in-out infinite alternate;
+}
+
+@keyframes starTwinkle1 {
+  0%   { opacity: 0.6; }
+  50%  { opacity: 1;   }
+  100% { opacity: 0.5; }
+}
+
+@keyframes starTwinkle2 {
+  0%   { opacity: 0.8; }
+  60%  { opacity: 0.4; }
+  100% { opacity: 0.9; }
+}
+
+/* ================================================================
+   GIANT YEAR WATERMARK
+   ================================================================ */
+.footer-year-bg {
+  position: absolute;
+  bottom: -0.15em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(12rem, 28vw, 22rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--f-text-dim);
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  opacity: 0.55;
+
+  /* Slow drift */
+  animation: yearDrift 12s ease-in-out infinite alternate;
+}
+
+@keyframes yearDrift {
+  from { transform: translateX(-50%) translateY(0); }
+  to   { transform: translateX(-50%) translateY(-6px); }
+}
+
+/* ================================================================
+   MAIN FOOTER CONTENT
+   ================================================================ */
+.footer-inner {
+  position: relative;
+  z-index: 3;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem 1.5rem;
+}
+
+/* ── Top row: brand left + coordinates right ── */
+.footer-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+}
+
+/* Brand mark */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.footer-brand-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-style: italic;
+  color: var(--f-ice);
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+.footer-brand-name span {
+  color: var(--f-violet);
+  font-style: normal;
+}
+
+.footer-brand-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--f-text);
+  opacity: 0.6;
+}
+
+/* Coordinates / metadata block */
+.footer-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.footer-meta-line {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--f-text-dim);
+  line-height: 1.6;
+}
+
+.footer-meta-line strong {
+  color: var(--f-violet);
+  font-weight: 400;
+}
+
+/* ── Divider ── */
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--f-border) 30%,
+    var(--f-border) 70%,
+    transparent
+  );
+  margin-bottom: 2rem;
+}
+
+/* ── Bottom row: copyright + craft note ── */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--f-text);
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+/* Pulsing dot before copyright */
+.footer-copy::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--f-violet);
+  box-shadow: 0 0 8px var(--f-violet);
+  animation: copyPulse 3.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes copyPulse {
+  0%, 100% { opacity: 0.5; box-shadow: 0 0 4px var(--f-violet); }
+  50%       { opacity: 1;   box-shadow: 0 0 14px var(--f-violet); }
+}
+
+.footer-copy-year {
+  color: var(--f-ice-muted);
+}
+
+.footer-craft {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--f-text-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-craft-heart {
+  color: var(--f-violet);
+  font-size: 0.7rem;
+  animation: heartbeat 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1);    }
+  14%       { transform: scale(1.25); }
+  28%       { transform: scale(1);    }
+  42%       { transform: scale(1.15); }
+}
+
+/* ── Back to top button ── */
+.footer-top-btn {
+  position: absolute;
+  top: -1.5rem;
+  right: 2.5rem;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.footer-top-btn-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--f-bg-mid);
+  border: 1px solid var(--f-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--f-ice-muted);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 20px rgba(130, 100, 255, 0.1);
+}
+
+.footer-top-btn:hover .footer-top-btn-circle {
+  background: var(--f-violet-dim);
+  border-color: var(--f-violet);
+  color: var(--f-ice);
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(130, 100, 255, 0.35);
+}
+
+.footer-top-btn-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--f-text-dim);
+  transition: color 0.3s;
+}
+
+.footer-top-btn:hover .footer-top-btn-label {
+  color: var(--f-violet);
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 620px) {
+  .footer-inner {
+    padding: 3.5rem 1.4rem 1.2rem;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer-meta {
+    align-items: flex-start;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .footer-year-bg {
+    font-size: 22vw;
+  }
+
+  .footer-top-btn {
+    right: 1.4rem;
+  }
+}

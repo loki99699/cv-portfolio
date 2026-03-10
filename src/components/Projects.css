@@ -1,0 +1,505 @@
+/* ================================================================
+   Projects.css
+   Aesthetic: Dark Architect / Blueprint Grid
+   Fonts: Barlow Condensed (card titles) + Lato (body) + Share Tech Mono (tech tags)
+   Accent: Electric indigo #6c63ff + warm white #f0ece3
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;600;700&family=Lato:wght@300;400&family=Share+Tech+Mono&display=swap');
+
+/* ── Variables ───────────────────────────────────────────────── */
+#projects {
+  --p-bg:             #0a0a0d;
+  --p-bg-card:        #0f0f14;
+  --p-bg-card-hover:  #131320;
+  --p-border:         rgba(108, 99, 255, 0.14);
+  --p-border-hover:   rgba(108, 99, 255, 0.45);
+  --p-indigo:         #6c63ff;
+  --p-indigo-dim:     rgba(108, 99, 255, 0.10);
+  --p-indigo-glow:    rgba(108, 99, 255, 0.22);
+  --p-indigo-muted:   rgba(108, 99, 255, 0.50);
+  --p-rose:           #ff6584;
+  --p-rose-dim:       rgba(255, 101, 132, 0.10);
+  --p-white:          #f0ece3;
+  --p-white-muted:    rgba(240, 236, 227, 0.55);
+  --p-white-dim:      rgba(240, 236, 227, 0.15);
+  --p-muted:          #3d3d52;
+  --p-text-body:      rgba(240, 236, 227, 0.65);
+  --font-display:     'Barlow Condensed', sans-serif;
+  --font-body:        'Lato', sans-serif;
+  --font-mono:        'Share Tech Mono', monospace;
+}
+
+/* ================================================================
+   SECTION BASE
+   ================================================================ */
+#projects {
+  position: relative;
+  background: var(--p-bg);
+  padding: 8rem 0 10rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Dot-matrix background */
+#projects::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle,
+    rgba(108, 99, 255, 0.18) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  mask-image: radial-gradient(
+    ellipse 90% 90% at 50% 50%,
+    black 20%, transparent 85%
+  );
+  opacity: 0.5;
+}
+
+/* Top ambient glow */
+#projects::after {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -60px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(108, 99, 255, 0.07) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================================================================
+   SECTION TITLE OVERRIDES
+   ================================================================ */
+#projects .section-title,
+#projects h2 {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5.5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--p-white);
+  margin-bottom: 0.2em;
+  -webkit-text-stroke: 1px rgba(108, 99, 255, 0.2);
+}
+
+/* Count badge next to title */
+#projects .projects-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--p-indigo);
+  background: var(--p-indigo-dim);
+  border: 1px solid var(--p-border);
+  padding: 0.25rem 0.7rem;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-left: 1rem;
+  position: relative;
+  top: -0.15em;
+}
+
+/* ================================================================
+   INNER LAYOUT
+   ================================================================ */
+#projects .projects-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+/* ================================================================
+   PROJECTS GRID
+   — First card spans full width (featured), rest in 2-col
+   ================================================================ */
+#projects .projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+
+/* First project is featured — full width */
+#projects .projects-grid .project-card:first-child {
+  grid-column: 1 / -1;
+}
+
+/* ================================================================
+   PROJECT CARD
+   ================================================================ */
+#projects .project-card {
+  position: relative;
+  background: var(--p-bg-card);
+  border: 1px solid var(--p-border);
+  padding: 2.4rem 2.4rem 2rem;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  /* Staggered fade-up */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: cardReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transition:
+    background  0.4s ease,
+    border-color 0.4s ease,
+    transform   0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow  0.4s ease;
+}
+
+#projects .project-card:nth-child(1) { animation-delay: 0.10s; }
+#projects .project-card:nth-child(2) { animation-delay: 0.22s; }
+#projects .project-card:nth-child(3) { animation-delay: 0.34s; }
+#projects .project-card:nth-child(4) { animation-delay: 0.46s; }
+#projects .project-card:nth-child(5) { animation-delay: 0.58s; }
+#projects .project-card:nth-child(6) { animation-delay: 0.70s; }
+
+@keyframes cardReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Corner bracket decorations (top-right & bottom-left) ── */
+#projects .project-card::before,
+#projects .project-card::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transition: width 0.35s ease, height 0.35s ease, opacity 0.35s ease;
+  opacity: 0;
+}
+
+/* Top-right bracket */
+#projects .project-card::before {
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid var(--p-indigo);
+  border-right: 2px solid var(--p-indigo);
+}
+
+/* Bottom-left bracket */
+#projects .project-card::after {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid var(--p-indigo);
+  border-left: 2px solid var(--p-indigo);
+}
+
+/* Hover state */
+#projects .project-card:hover {
+  background: var(--p-bg-card-hover);
+  border-color: var(--p-border-hover);
+  transform: translateY(-5px);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 40px var(--p-indigo-glow),
+    inset 0 0 60px rgba(108, 99, 255, 0.03);
+}
+
+#projects .project-card:hover::before,
+#projects .project-card:hover::after {
+  width: 36px;
+  height: 36px;
+  opacity: 1;
+}
+
+/* Inner indigo sweep glow on hover */
+#projects .project-card .card-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(108, 99, 255, 0.04) 0%,
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.45s;
+  pointer-events: none;
+}
+
+#projects .project-card:hover .card-glow {
+  opacity: 1;
+}
+
+/* ================================================================
+   CARD HEADER — index + title
+   ================================================================ */
+#projects .card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#projects .card-index {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--p-muted);
+  letter-spacing: 0.15em;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  transition: color 0.3s;
+}
+
+#projects .project-card:hover .card-index {
+  color: var(--p-indigo-muted);
+}
+
+#projects .card-title-wrap {
+  flex: 1;
+}
+
+#projects .card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--p-white);
+  line-height: 1.05;
+  margin: 0;
+  transition: color 0.3s;
+}
+
+#projects .project-card:hover .card-title {
+  color: var(--p-indigo);
+}
+
+/* Featured card gets larger title */
+#projects .project-card:first-child .card-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+}
+
+/* Featured label */
+#projects .card-featured-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--p-indigo);
+  background: var(--p-indigo-dim);
+  border: 1px solid var(--p-border);
+  padding: 0.2rem 0.6rem;
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
+
+/* External link icon */
+#projects .card-ext-icon {
+  font-size: 1rem;
+  color: var(--p-muted);
+  transition: color 0.3s, transform 0.3s;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 0.15rem;
+}
+
+#projects .project-card:hover .card-ext-icon {
+  color: var(--p-indigo);
+  transform: translate(3px, -3px);
+}
+
+/* ================================================================
+   CARD DESCRIPTION
+   ================================================================ */
+#projects .card-description {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--p-text-body);
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  flex: 1;
+}
+
+/* ================================================================
+   TECH STACK TAGS
+   ================================================================ */
+#projects .card-tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Small annotation label */
+#projects .card-tech-row::before {
+  content: '//';
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--p-muted);
+  flex-shrink: 0;
+  margin-right: 0.2rem;
+}
+
+#projects .tech-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--p-white-muted);
+  background: rgba(240, 236, 227, 0.04);
+  border: 1px solid rgba(240, 236, 227, 0.08);
+  padding: 0.28rem 0.75rem;
+  border-radius: 2px;
+  transition: color 0.3s, border-color 0.3s, background 0.3s;
+  cursor: default;
+  white-space: nowrap;
+}
+
+#projects .project-card:hover .tech-tag {
+  color: var(--p-indigo);
+  border-color: rgba(108, 99, 255, 0.3);
+  background: var(--p-indigo-dim);
+}
+
+/* ================================================================
+   VIEW PROJECT LINK
+   ================================================================ */
+#projects .card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(240, 236, 227, 0.06);
+  margin-top: auto;
+}
+
+#projects .card-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--p-white-muted);
+  transition: color 0.3s;
+  padding-bottom: 0.2rem;
+}
+
+/* Animated line drawn left → right */
+#projects .card-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--p-indigo);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#projects .project-card:hover .card-link {
+  color: var(--p-indigo);
+}
+
+#projects .project-card:hover .card-link::after {
+  width: 100%;
+}
+
+#projects .card-link-arrow {
+  font-size: 0.9rem;
+  transition: transform 0.3s;
+  display: inline-block;
+}
+
+#projects .project-card:hover .card-link-arrow {
+  transform: translate(4px, 0);
+}
+
+/* ================================================================
+   BOTTOM DECORATION — horizontal rule with label
+   ================================================================ */
+#projects .projects-footer-rule {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 4rem auto 0;
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+#projects .projects-footer-rule::before,
+#projects .projects-footer-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--p-border) 40%,
+    var(--p-border) 60%,
+    transparent
+  );
+}
+
+#projects .rule-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--p-muted);
+  white-space: nowrap;
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 768px) {
+  #projects .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #projects .project-card:first-child {
+    grid-column: auto;
+  }
+
+  #projects .projects-inner {
+    padding: 0 1.4rem;
+  }
+
+  #projects .project-card {
+    padding: 1.8rem 1.6rem 1.6rem;
+  }
+
+  #projects .projects-footer-rule {
+    padding: 0 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #projects {
+    padding: 5rem 0 7rem;
+  }
+
+  #projects .card-title {
+    font-size: 1.4rem !important;
+  }
+}

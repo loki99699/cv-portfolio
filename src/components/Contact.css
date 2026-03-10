@@ -1,0 +1,616 @@
+/* ================================================================
+   Contact.css
+   Aesthetic: Brutalist Neon Terminal / Signal Broadcast
+   Fonts: Syne (display) + JetBrains Mono (body/links)
+   Accent: Electric Cyan + Signal Green
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ── Variables ────────────────────────────────────────────────── */
+#contact {
+  --c-bg:           #0e0f0f;
+  --c-surface:      #131515;
+  --c-border:       #1f2323;
+  --c-border-lit:   #00e5cc;
+  --c-cyan:         #00e5cc;
+  --c-green:        #39ff7a;
+  --c-red:          #ff3f5b;
+  --c-text:         #d4dbd9;
+  --c-text-muted:   #4a5450;
+  --c-text-dim:     #2a3030;
+  --c-glow-cyan:    rgba(0, 229, 204, 0.15);
+  --c-glow-green:   rgba(57, 255, 122, 0.12);
+  --font-display:   'Syne', sans-serif;
+  --font-mono:      'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* ================================================================
+   SECTION BASE
+   ================================================================ */
+#contact {
+  position: relative;
+  background-color: var(--c-bg);
+  padding: 8rem 0 10rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Scanline overlay */
+#contact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.18) 3px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+  opacity: 0.35;
+}
+
+/* Corner cross-hair marks */
+#contact::after {
+  content: '';
+  position: absolute;
+  top: 2.5rem;
+  right: 2.5rem;
+  width: 48px;
+  height: 48px;
+  border-top: 1px solid var(--c-cyan);
+  border-right: 1px solid var(--c-cyan);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* Bottom-left crosshair */
+#contact .contact-crosshair-bl {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2.5rem;
+  width: 48px;
+  height: 48px;
+  border-bottom: 1px solid var(--c-cyan);
+  border-left: 1px solid var(--c-cyan);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ambient glow blobs */
+#contact .contact-glow-a {
+  position: absolute;
+  bottom: -60px;
+  right: 5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--c-glow-cyan) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#contact .contact-glow-b {
+  position: absolute;
+  top: 10%;
+  left: -80px;
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, var(--c-glow-green) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================================================================
+   SECTION TITLE
+   ================================================================ */
+#contact .section-title,
+#contact h2 {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 800;
+  color: var(--c-text);
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-transform: uppercase;
+
+  /* Glitch clip pseudo-layers via outline trick */
+  -webkit-text-stroke: 1px rgba(0, 229, 204, 0.15);
+  paint-order: stroke fill;
+
+  animation: contactTitleIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Glitch flicker on title */
+#contact .section-title::after,
+#contact h2::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 0;
+  color: var(--c-cyan);
+  opacity: 0;
+  clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+  animation: glitchFlicker 6s infinite 2s;
+}
+
+@keyframes glitchFlicker {
+  0%, 96%, 100%  { opacity: 0; transform: translateX(0); }
+  97%            { opacity: 0.6; transform: translateX(-3px); }
+  98%            { opacity: 0.3; transform: translateX(3px); }
+  99%            { opacity: 0.5; transform: translateX(-1px); }
+}
+
+@keyframes contactTitleIn {
+  from { opacity: 0; transform: translateY(20px) skewX(-2deg); }
+  to   { opacity: 1; transform: translateY(0) skewX(0); }
+}
+
+/* ── Status tag above title ── */
+#contact .contact-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-green);
+  margin-bottom: 1.2rem;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid rgba(57, 255, 122, 0.25);
+  border-radius: 2px;
+  background: rgba(57, 255, 122, 0.04);
+  position: relative;
+  z-index: 1;
+  animation: contactTitleIn 0.5s ease both;
+}
+
+#contact .contact-status-tag::before {
+  content: '';
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-green);
+  box-shadow: 0 0 8px var(--c-green);
+  animation: blink 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.15; }
+}
+
+/* ================================================================
+   INNER CONTAINER
+   ================================================================ */
+#contact .contact-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+/* ================================================================
+   EMAIL ROW
+   ================================================================ */
+#contact .contact-email-row {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin: 2.8rem 0 3.5rem;
+  padding: 1.4rem 2rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-cyan);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+  cursor: default;
+}
+
+#contact .contact-email-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--c-glow-cyan), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+#contact .contact-email-row:hover {
+  border-color: var(--c-cyan);
+  background: #161919;
+}
+
+#contact .contact-email-row:hover::before {
+  opacity: 1;
+}
+
+#contact .contact-email-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-cyan);
+  background: rgba(0, 229, 204, 0.08);
+  border: 1px solid rgba(0, 229, 204, 0.2);
+  padding: 0.25rem 0.7rem;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+#contact .contact-email-value {
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 2vw, 1.08rem);
+  font-weight: 500;
+  color: var(--c-text);
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 1;
+}
+
+#contact .contact-email-value a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+#contact .contact-email-value a:hover {
+  color: var(--c-cyan);
+}
+
+/* Cursor blink after email */
+#contact .contact-email-value::after {
+  content: '_';
+  color: var(--c-cyan);
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+/* ================================================================
+   LINK CARDS GRID
+   ================================================================ */
+#contact .contact-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+
+/* ── Individual Link Card ── */
+#contact .contact-link-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.8rem 1.8rem 1.5rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--c-text);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s,
+              background 0.3s;
+
+  /* Entry animation */
+  opacity: 0;
+  animation: cardSlideIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+#contact .contact-link-card:nth-child(1) { animation-delay: 0.1s; }
+#contact .contact-link-card:nth-child(2) { animation-delay: 0.22s; }
+#contact .contact-link-card:nth-child(3) { animation-delay: 0.34s; }
+
+@keyframes cardSlideIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Top corner accent */
+#contact .contact-link-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  border-top: 2px solid var(--c-cyan);
+  border-right: 2px solid var(--c-cyan);
+  opacity: 0;
+  transition: opacity 0.3s, width 0.3s, height 0.3s;
+}
+
+/* Bottom-left corner accent */
+#contact .contact-link-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--c-cyan);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* GitHub card — green accent */
+#contact .contact-link-card.card-github::before,
+#contact .contact-link-card.card-github::after {
+  border-color: var(--c-green);
+  background: var(--c-green);
+}
+
+#contact .contact-link-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 229, 204, 0.3);
+  background: #141717;
+}
+
+#contact .contact-link-card.card-github:hover {
+  border-color: rgba(57, 255, 122, 0.3);
+}
+
+#contact .contact-link-card:hover::before {
+  opacity: 1;
+  width: 42px;
+  height: 42px;
+}
+
+#contact .contact-link-card:hover::after {
+  width: 100%;
+}
+
+/* Card inner top row */
+#contact .card-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+}
+
+/* Platform icon */
+#contact .card-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  filter: grayscale(0.4);
+  transition: filter 0.3s;
+}
+
+#contact .contact-link-card:hover .card-icon {
+  filter: grayscale(0);
+}
+
+/* Arrow indicator */
+#contact .card-arrow {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--c-text-muted);
+  transition: color 0.3s, transform 0.3s;
+  line-height: 1;
+}
+
+#contact .contact-link-card:hover .card-arrow {
+  color: var(--c-cyan);
+  transform: translate(3px, -3px);
+}
+
+#contact .contact-link-card.card-github:hover .card-arrow {
+  color: var(--c-green);
+}
+
+/* Card label */
+#contact .card-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  margin-bottom: 0.35rem;
+}
+
+/* Card name */
+#contact .card-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--c-text);
+  letter-spacing: -0.01em;
+  transition: color 0.3s;
+}
+
+#contact .contact-link-card:hover .card-name {
+  color: var(--c-cyan);
+}
+
+#contact .contact-link-card.card-github:hover .card-name {
+  color: var(--c-green);
+}
+
+/* ================================================================
+   FOOTER TRANSMISSION LINE
+   ================================================================ */
+#contact .contact-transmission {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin: 4.5rem auto 0;
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#contact .contact-transmission::before {
+  content: '//';
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--c-text-muted);
+  flex-shrink: 0;
+}
+
+#contact .transmission-text {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+#contact .transmission-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 229, 204, 0.35),
+    transparent
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scanning animation on the line */
+#contact .transmission-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--c-cyan),
+    transparent
+  );
+  animation: scanLine 3s linear infinite;
+}
+
+@keyframes scanLine {
+  from { left: -40%; }
+  to   { left: 110%; }
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 640px) {
+  #contact {
+    padding: 5rem 0 7rem;
+  }
+
+  #contact .contact-inner {
+    padding: 0 1.4rem;
+  }
+
+  #contact .contact-email-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 1.2rem 1.2rem;
+  }
+
+  #contact .contact-links-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #contact .section-title,
+  #contact h2 {
+    font-size: 2.8rem;
+  }
+
+  #contact .contact-transmission {
+    padding: 0 1.4rem;
+  }
+}
+
+/* phone */
+
+#contact .contact-phone-row {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin: 2.8rem 0 3.5rem;
+  padding: 1.4rem 2rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-cyan);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+  cursor: default;
+}
+
+#contact .contact-phone-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--c-glow-cyan), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+#contact .contact-phone-row:hover {
+  border-color: var(--c-cyan);
+  background: #161919;
+}
+
+#contact .contact-phone-row:hover::before {
+  opacity: 1;
+}
+
+#contact .contact-phone-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-cyan);
+  background: rgba(0, 229, 204, 0.08);
+  border: 1px solid rgba(0, 229, 204, 0.2);
+  padding: 0.25rem 0.7rem;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+#contact .contact-phone-value {
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 2vw, 1.08rem);
+  font-weight: 500;
+  color: var(--c-text);
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 1;
+}
+
+#contact .contact-phone-value a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+#contact .contact-phone-value a:hover {
+  color: var(--c-cyan);
+}
+
+/* Cursor blink after email */
+#contact .contact-phone-value::after {
+  content: '_';
+  color: var(--c-cyan);
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
