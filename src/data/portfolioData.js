@@ -6,6 +6,23 @@ const portfolioData = {
   phone: "7892038598",
   github: "https://github.com/loki99699",
   linkedin: "https://www.linkedin.com/in/lokesh-poojary-4456a4355/",
+  education: [
+  {
+    degree: "Diploma in Computer Science",
+    institution: "NRAM Polytechnic, Nitte",
+    year: "2023 - 2026",
+    description:
+      "Focused on software development, web technologies, and programming fundamentals including Java and JavaScript."
+  },
+
+  {
+    degree: "Secondary School Education (SSLC)",
+    institution: "GPUC, Sanoor",
+    year: "2020 - 2021",
+    description:
+      "Completed secondary school education with focus on mathematics and science."
+  }
+],
 
   about: `
   My name is Lokesh, and I am a passionate Full Stack Developer currently pursuing a Diploma in Computer Science at NRAM Polytechnic, Nitte, with graduation expected in 2026. I have a strong interest in building modern web applications and continuously improving my development skills.

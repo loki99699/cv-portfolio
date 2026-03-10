@@ -68,6 +68,16 @@ function Hero() {
             <span className="btn-label">LinkedIn</span>
             <span className="btn-arrow" aria-hidden="true">↗</span>
           </a>
+
+          <a
+             href="/Loki Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="hero-btn-primary"
+          >
+            <span className="btn-label">Resume</span>
+            <span className="btn-arrow" aria-hidden="true">→</span>
+          </a>
         </div>
 
       </div>
