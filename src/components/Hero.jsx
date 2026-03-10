@@ -1,7 +1,7 @@
 import React from "react";
 import portfolioData from "../data/portfolioData";
 import "./Hero.css";
-// import "../assets/loki1.jpeg";
+import profileImage from "../assets/loki1.jpeg";
 // import "./HeroImage.css"; // ← NEW: image-only styles
 
 function Hero() {
@@ -88,7 +88,7 @@ function Hero() {
         {/* Image frame — circular crop */}
         <div className="hero-image-frame">
           <img
-            src="/src/assets/loki1.jpeg"
+            src={profileImage}
             alt={`Portrait of ${portfolioData.name}`}
             loading="eager"
           />
