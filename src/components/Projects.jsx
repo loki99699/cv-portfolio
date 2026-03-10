@@ -55,18 +55,7 @@ function Projects() {
               </div>
 
               {/* ── Card footer: view link ── */}
-              <div className="card-footer">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="card-link"
-                  aria-label={`View ${project.title} project`}
-                >
-                  View Project
-                  <span className="card-link-arrow" aria-hidden="true">→</span>
-                </a>
-              </div>
+              
 
             </article>
           ))}
