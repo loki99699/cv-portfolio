@@ -70,7 +70,7 @@ function Hero() {
           </a>
 
           <a
-             href="/Loki Resume.pdf"
+             href="/Lokesh Cv.pdf"
             target="_blank"
             rel="noreferrer"
             className="hero-btn-primary"
